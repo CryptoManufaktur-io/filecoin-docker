@@ -1,0 +1,27 @@
+version: "3.4"
+services:
+  lotus:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILD_TARGET=${LOTUS_BUILD_TARGET}
+    user: "10000"
+    stop_grace_period: 1m
+    image: lotus:local
+    volumes: 
+      - filecoin-data:/home/filecoin/.lotus
+    ports:
+      - 6665:6665/tcp
+    entrypoint:
+       - docker-entrypoint.sh
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.lotus.service=lotus
+      - traefik.http.routers.lotus.entrypoints=websecure
+      - traefik.http.routers.lotus.rule=Host(`${RPC_HOST}.${DOMAIN}`)
+      - traefik.http.services.lotus.loadbalancer.server.port=1234
+
+volumes:
+  filecoin-data:
