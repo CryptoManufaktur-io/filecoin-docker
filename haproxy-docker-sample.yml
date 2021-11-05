@@ -1,0 +1,39 @@
+x-logging: &logging
+  logging:
+    driver: json-file
+    options:
+      max-size: 20m
+      max-file: "3"
+
+  lotus-haproxy:
+    image: haproxy:latest
+    user: root
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        apt-get update
+        apt-get install -y curl jq bc ca-certificates
+        haproxy -f /usr/local/etc/haproxy/haproxy.cfg
+    networks:
+      default:
+        aliases:
+          - filecoin-lb.example.com
+    configs:
+      - source: lotus-haproxy.cfg
+        target: /usr/local/etc/haproxy/haproxy.cfg
+      - source: check-fcsync.sh
+        target: /var/lib/haproxy/check-fcsync.sh
+        mode: 0555
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: ["node.role == worker"]
+    <<: *logging
+
+configs:
+  lotus-haproxy.cfg:
+    external: true
+  check-fcsync.sh:
+    external: true
+
