@@ -21,9 +21,11 @@ services:
       - traefik.http.routers.lotus.service=lotus
       - traefik.http.routers.lotus.entrypoints=websecure
       - traefik.http.routers.lotus.rule=Host(`${RPC_HOST}.${DOMAIN}`)
+      - traefik.http.routers.lotus.tls.certresolver=letsencrypt
       - traefik.http.routers.lotuslb.service=lotus
       - traefik.http.routers.lotuslb.entrypoints=websecure
       - traefik.http.routers.lotuslb.rule=Host(`${RPC_LB}.${DOMAIN}`)
+      - traefik.http.routers.lotuslb.tls.certresolver=letsencrypt
       - traefik.http.services.lotus.loadbalancer.server.port=1234
 
 volumes:
