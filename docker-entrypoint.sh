@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 if [ ! -f /home/filecoin/.lotus/setupdone ]; then
-  lotus daemon --import-snapshot https://fil-chain-snapshots-fallback.s3.amazonaws.com/mainnet/minimal_finality_stateroots_latest.car --halt-after-import
+  lotus daemon --import-snapshot https://snapshots.mainnet.filops.net/minimal/latest.zst --halt-after-import
   export P2P_ANNOUNCE_IP=$(wget -qO- ifconfig.me/ip)
   dasel put string -f /home/filecoin/.lotus/config.toml API.ListenAddress "/ip4/0.0.0.0/tcp/1234/http"
   dasel put string -f /home/filecoin/.lotus/config.toml API.Timeout "30s"
