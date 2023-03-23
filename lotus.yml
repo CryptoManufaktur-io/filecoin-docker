@@ -29,14 +29,13 @@ services:
       - traefik.http.services.lotus.loadbalancer.server.port=1234
 
   prune-lotus:
+    profiles: ["tools"]
     restart: "no"
     user: "10000"
     stop_grace_period: 1m
     image: lotus:local
     volumes:
       - filecoin-data:/home/filecoin/.lotus
-    ports:
-      - 6665:6665/tcp
     entrypoint:
        - lotus chain prune hot
 
