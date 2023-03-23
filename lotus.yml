@@ -28,8 +28,8 @@ services:
       - traefik.http.routers.lotuslb.tls.certresolver=letsencrypt
       - traefik.http.services.lotus.loadbalancer.server.port=1234
 
-    prune-lotus:
-    restart: no
+  prune-lotus:
+    restart: "no"
     user: "10000"
     stop_grace_period: 1m
     image: lotus:local
