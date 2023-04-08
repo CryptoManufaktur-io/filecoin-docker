@@ -28,16 +28,5 @@ services:
       - traefik.http.routers.lotuslb.tls.certresolver=letsencrypt
       - traefik.http.services.lotus.loadbalancer.server.port=1234
 
-  prune-lotus:
-    profiles: ["tools"]
-    restart: "no"
-    user: "10000"
-    stop_grace_period: 1m
-    image: lotus:local
-    volumes:
-      - filecoin-data:/home/filecoin/.lotus
-    entrypoint:
-       - lotus chain prune hot
-
 volumes:
   filecoin-data:

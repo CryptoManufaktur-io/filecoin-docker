@@ -12,3 +12,7 @@ restarting the filecoin service. These files are in the docker volume for fileco
 To update lotus, run `docker-compose build --no-cache`, followed by `docker-compose down && docker-compose up -d`.
 
 `lotus-haproxy.cfg` is a sample haproxy configuration file, and assumes that all filecoin nodes have the same token. `check-fcsync.sh` verifies sync status for haproxy. `haproxy-docker-sample.yml` is an example for a docker-compose file running haproxy, inside a docker swarm mode.
+
+## Pruning
+
+To prune the chain, run `docker exec <lotus-container> lotus chain prune hot`
