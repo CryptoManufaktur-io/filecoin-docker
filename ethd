@@ -146,6 +146,7 @@ check_for_snap() {
 
 install() {
     check_for_snap
+    set -e
     while true; do
         read -rp "This will attempt to install docker and make your user part of the docker group. Do you wish to continue? (no/yes) " yn
         case $yn in
@@ -210,6 +211,7 @@ install() {
     else
         echo "This script does not know how to install docker on $__distro"
     fi
+    set +e
     return 0
 }
 
