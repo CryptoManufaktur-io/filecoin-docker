@@ -1,6 +1,6 @@
 # filecoin-docker
 
-docker-compose for filecoin node
+docker compose for filecoin node
 
 `./ethd install` can install docker-ce for you
 

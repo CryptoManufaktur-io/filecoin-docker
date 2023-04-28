@@ -1,4 +1,4 @@
-# Build Geth in a stock Go build container
+# Build Lotus in a stock Go build container
 FROM golang:1.20-bullseye as builder
 
 ARG BUILD_TARGET
