@@ -1,5 +1,5 @@
 # Build Lotus in a stock Go build container
-FROM golang:1.20-bullseye as builder
+FROM golang:1.19-bullseye as builder
 
 ARG BUILD_TARGET
 
@@ -9,7 +9,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 WORKDIR /src
 RUN bash -c "git clone https://github.com/filecoin-project/lotus.git && cd lotus && git config advice.detachedHead false && git fetch --all --tags && git checkout ${BUILD_TARGET} && make clean all && make install"
 
-FROM ghcr.io/tomwright/dasel:v2.1.2 as dasel
+FROM ghcr.io/tomwright/dasel:v2.2.0-alpine as dasel
 
 # Pull all binaries into a second stage deploy container
 FROM debian:bullseye-slim
