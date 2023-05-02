@@ -1,5 +1,5 @@
 # Build Lotus in a stock Go build container
-FROM golang:1.19-bullseye as builder
+FROM golang:1.2L:0-bullseye as builder
 
 ARG BUILD_TARGET
 
