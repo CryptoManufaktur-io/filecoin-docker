@@ -14,6 +14,9 @@ services:
       - filecoin-data:/home/filecoin/.lotus
     ports:
       - 6665:6665/tcp
+    environment:
+      - LOTUS_FVM_CONCURRENCY=${FVM_CONCURRENCY:-4}
+      - LOTUS_FVM_CONCURRENCY_RESERVED=4
     entrypoint:
        - docker-entrypoint.sh
     labels:
