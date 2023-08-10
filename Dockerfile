@@ -1,5 +1,5 @@
 # Build Lotus in a stock Go build container
-FROM golang:1.20-bullseye as builder
+FROM golang:1.20-bookworm as builder
 
 ARG BUILD_TARGET
 
@@ -12,7 +12,7 @@ RUN bash -c "git clone https://github.com/filecoin-project/lotus.git && cd lotus
 FROM ghcr.io/tomwright/dasel:v2.3.4-alpine as dasel
 
 # Pull all binaries into a second stage deploy container
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ARG USER=filecoin
 ARG UID=10000
