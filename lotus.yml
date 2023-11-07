@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   lotus:
     restart: unless-stopped
@@ -10,6 +9,7 @@ services:
     user: "10000"
     stop_grace_period: 1m
     image: lotus:local
+    pull_policy: build
     volumes: 
       - filecoin-data:/home/filecoin/.lotus
     ports:
