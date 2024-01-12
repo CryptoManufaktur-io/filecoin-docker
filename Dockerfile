@@ -1,5 +1,5 @@
 # Build Lotus in a stock Go build container
-FROM golang:1.20-bookworm as builder
+FROM golang:1.21-bookworm as builder
 
 ARG BUILD_TARGET
 
@@ -9,8 +9,8 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 WORKDIR /src
 RUN bash -c "git clone https://github.com/filecoin-project/lotus.git && cd lotus \
-&& git config advice.detachedHead false && git fetch --all --tags && git checkout ${BUILD_TARGET} && make clean all \
-&& make install"
+&& git config advice.detachedHead false && git fetch --all --tags && git checkout ${BUILD_TARGET} \
+&& make lotus"
 
 FROM ghcr.io/tomwright/dasel:v2.3.6-alpine as dasel
 
@@ -32,7 +32,7 @@ RUN adduser \
 
 RUN mkdir -p /home/${USER}/.lotus && chown -R ${USER}:${USER} /home/${USER}
 # Copy executable
-COPY --from=builder /usr/local/bin/lotus /usr/local/bin/
+COPY --from=builder /src/lotus/lotus /usr/local/bin/
 COPY ./docker-entrypoint.sh /usr/local/bin/
 COPY --from=dasel /usr/local/bin/dasel /usr/local/bin/
 

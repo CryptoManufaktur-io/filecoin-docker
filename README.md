@@ -19,4 +19,4 @@ To update lotus, run `./ethd update`, followed by `./ethd up`.
 
 To prune the chain, run `docker exec <lotus-container> lotus chain prune hot-moving`. This requires about 300 GiB free space.
 
-This is filecoin-docker v1.1
+This is filecoin-docker v1.1.1
