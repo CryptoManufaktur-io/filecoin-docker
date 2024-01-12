@@ -12,7 +12,7 @@ RUN bash -c "git clone https://github.com/filecoin-project/lotus.git && cd lotus
 && git config advice.detachedHead false && git fetch --all --tags && git checkout ${BUILD_TARGET} \
 && make lotus"
 
-FROM ghcr.io/tomwright/dasel:v2.3.6-alpine as dasel
+FROM ghcr.io/tomwright/dasel:v2.5.0-alpine as dasel
 
 # Pull all binaries into a second stage deploy container
 FROM debian:bookworm-slim
