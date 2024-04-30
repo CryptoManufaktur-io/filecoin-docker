@@ -9,7 +9,7 @@ services:
     user: "10000"
     stop_grace_period: 1m
     image: lotus:local
-    pull_policy: build
+    pull_policy: never
     volumes: 
       - filecoin-data:/home/filecoin/.lotus
     ports:
